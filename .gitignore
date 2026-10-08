@@ -1,0 +1,69 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.bin
+
+# Go build output
+/bin/
+/build/
+/dist/
+
+# Go coverage and profiling
+*.out
+*.prof
+*.pprof
+coverage.out
+coverage.html
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# OS files
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+
+# Test artifacts
+*.test
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Application-specific generated files
+*.pid
+
+# Local configuration
+config.local.*
+```
+
+Then run:
+
+```bash
+cd /path/to/vm-crud
+
+git add .gitignore
+git status
+git commit -m "Add gitignore"
+git push
+```
+
+**Important:** If your PostgreSQL password or other secrets are already committed to Git, adding them to `.gitignore` does **not** remove them from Git history. In that case, remove/rotate the secret as well.

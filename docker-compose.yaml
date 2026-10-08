@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypass
+      POSTGRES_DB: mydb
+    ports:
+      - "5433:5432"
+
+  pgbouncer:
+    image: edoburu/pgbouncer
+    container_name: pgbouncer
+  
+    ports:
+      - "6432:5432"
+  
+    volumes:
+      - ./userlist.txt:/etc/pgbouncer/userlist.txt
+  
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: myuser
+      DB_PASSWORD: mypass
+      DB_NAME: mydb
+  
+      POOL_MODE: transaction
+      MAX_CLIENT_CONN: 1000
+      DEFAULT_POOL_SIZE: 50
+  
+      AUTH_TYPE: plain
+      AUTH_FILE: /etc/pgbouncer/userlist.txt
+
+    depends_on:
+      - postgres
